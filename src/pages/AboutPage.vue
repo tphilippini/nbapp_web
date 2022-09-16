@@ -5,21 +5,20 @@
   </div>
 </template>
 
-<script setup>
-</script>
+<script setup></script>
 
-<style lang="scss">
-  .container {
-    text-align: center;
-  }
+<style lang="scss" scoped>
+.container {
+  text-align: center;
+}
 
-  .title {
-    color: $primary;
-    margin-top: 1em;
-  }
+.title {
+  color: $primary;
+  margin-top: 1em;
+}
 
-  .subtitle {
-    font-size: 12px;
-    margin-bottom: 1em;
-  }
+.subtitle {
+  font-size: 12px;
+  margin-bottom: 1em;
+}
 </style>
