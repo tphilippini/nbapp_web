@@ -40,7 +40,6 @@ body {
   margin: 0 auto;
   padding: 0;
   font-family: $font-main;
-  max-width: $max-width;
   text-size-adjust: none;
 }
 
@@ -56,4 +55,8 @@ a {
 
 button, a {
   cursor: pointer;
+}
+
+*:focus {
+  outline: none;
 }
