@@ -13,8 +13,8 @@
                   <div class="flex-none">
                     <div class="sj-avatar-container svelte-173satm">
                       <img
-                        src="https://ui-avatars.com/api/?background=000&amp;color=fff&amp;size=65&amp;font-size=0.3&amp;bold=true&amp;name=Test Test"
-                        alt="Test Test avatar"
+                        :src="`https://ui-avatars.com/api/?background=000&amp;color=fff&amp;size=65&amp;font-size=0.3&amp;bold=true&amp;name=${username}`"
+                        :alt="username"
                         class="svelte-173satm"
                         referrerpolicy="no-referrer"
                         style="width: 26px; height: 26px"
@@ -255,13 +255,10 @@
         <div class="relative">
           <div class="w-full px-4 py-4 text-sm font-medium text-left border-t">
             <div class="flex items-center gap-2">
-              <div
-                class="flex flex-col justify-center flex-none w-6 h-6 p-1 rounded-md bg-zinc-200"
-              >
+              <div class="flex flex-col justify-center flex-none w-6 h-6 p-1">
                 <img
-                  src="https://ui-avatars.com/api/?background=000&amp;color=fff&amp;size=65&amp;font-size=0.3&amp;bold=true&amp;name=Test Test"
-                  alt="Test Test avatar"
-                  class="svelte-173satm"
+                  :src="`https://ui-avatars.com/api/?background=000&amp;color=fff&amp;size=65&amp;font-size=0.3&amp;bold=true&amp;name=${username}`"
+                  :alt="username"
                   referrerpolicy="no-referrer"
                   style="width: 26px; height: 26px"
                 />
@@ -332,6 +329,8 @@ import { useAuthStore, useUsersStore } from '@/stores';
 const authStore = useAuthStore();
 const usersStore = useUsersStore();
 const { user } = storeToRefs(usersStore);
+
+const username = usersStore.getAvatarInitial();
 
 const handleSignOut = () => {
   authStore.logout();

@@ -109,6 +109,7 @@ export const useAuthStore = defineStore(
 
         loading.value = false;
         messageStore.success(response.message);
+        messageStore.clear();
         // redirect to previous url or default to home page
         router.push('/auth/signin');
       } catch (error) {

@@ -1,13 +1,13 @@
 import { AuthLayout, Default } from '@/layouts';
 import { Home, NotFound } from '@/views';
 import { createRouter, createWebHistory } from 'vue-router';
+import { useAuthStore, useMessageStore } from '@/stores';
 
 import accountRoutes from '@/routes/account.routes';
 import authRoutes from '@/routes/auth.routes';
 import jwtDecode from 'jwt-decode';
 // import usersRoutes from '@/routes/users.routes';
 import { storeToRefs } from 'pinia';
-import { useAuthStore } from '@/stores';
 
 export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,8 +44,8 @@ export const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   // clear alert on route change
-  // const alertStore = useAlertStore();
-  // alertStore.clear();
+  const messageStore = useMessageStore();
+  messageStore.clear();
 
   const authStore = useAuthStore();
   const { auth } = storeToRefs(authStore);

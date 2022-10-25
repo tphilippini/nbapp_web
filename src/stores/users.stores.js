@@ -45,6 +45,55 @@ export const useUsersStore = defineStore(
       localStorage.removeItem('users');
     };
 
+    const getAvatarInitial = () => {
+      let username = user.value.alias;
+      if (user.value.firstName && user.value.lastName) {
+        username = `${user.value.firstName} ${user.value.lastName}`;
+      }
+
+      return username;
+    };
+
+    const patch = async (profile) => {
+      try {
+        loading.value = true;
+        const userResponse = await fetchWrapper.patch(
+          `${baseUrl}/${profile.uuid}`,
+          {
+            ...profile,
+            grant_type: 'update',
+            user_type: 'user',
+          }
+        );
+
+        const data = userResponse.data[0];
+
+        user.value = {
+          uuid: data.uuid,
+          email: data.email,
+          alias: data.alias,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          methods: data.methods,
+        };
+
+        loading.value = false;
+        messageStore.success(userResponse.message);
+
+        setTimeout(() => {
+          messageStore.clear();
+        }, 2000);
+      } catch (error) {
+        loading.value = false;
+        if (error.errors) {
+          messageStore.error(error.errors[0].message);
+        } else {
+          messageStore.error('Désolé, une erreur est survenue...');
+        }
+        messageStore.clear();
+      }
+    };
+
     // async getAll() {
     //   this.users = { loading: true };
     //   try {
@@ -96,6 +145,8 @@ export const useUsersStore = defineStore(
       loading,
       clear,
       register,
+      patch,
+      getAvatarInitial,
     };
   },
   {

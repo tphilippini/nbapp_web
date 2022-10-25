@@ -11,6 +11,8 @@
         :id="id"
         :name="name"
         :type="type"
+        :value="value"
+        :disabled="disabled"
         class="block flex-grow rounded-r-md border py-2.5 px-2 text-sm disabled:opacity-60 focus:ring-primary-600 focus:border-primary-600 rounded-md"
         :placeholder="placeholder"
         :class="[
@@ -50,6 +52,10 @@ defineProps({
     type: String,
     default: 'text',
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
   error: {
     type: String,
     default: null,
@@ -57,6 +63,10 @@ defineProps({
   label: {
     type: String,
     required: true,
+  },
+  value: {
+    type: String,
+    default: null,
   },
   placeholder: {
     type: String,

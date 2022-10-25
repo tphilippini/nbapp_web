@@ -5,14 +5,70 @@
   >
     <div class="h-full max-w-[82rem] pt-8">
       <div class="flex items-center">
-        <h1 class="title">Account</h1>
+        <h1 class="text-xl">Account Settings</h1>
         <div class="flex-grow"></div>
       </div>
-      <h2 class="mt-6 font-medium text-gray-800">Personal information</h2>
+      <h2 class="mt-6 font-medium text-gray-600">Personal information</h2>
       <p class="mt-2 text-sm text-gray-500">
-        Provide your name and email so we can get in touch with you.
+        Provide your information so we can get in touch with you.
       </p>
       <div class="mt-4">
+        <Form
+          v-slot="{ errors }"
+          :validation-schema="schema"
+          class="flex flex-col max-w-lg gap-4 mt-6"
+          @submit="onSubmit"
+        >
+          <UiMessage />
+
+          <div class="flex gap-4">
+            <UiInput
+              id="firstName"
+              name="firstName"
+              label="First name"
+              :value="user.firstName"
+              placeholder="Enter your firstname"
+              :error="errors.firstName"
+            />
+
+            <UiInput
+              id="lastName"
+              name="lastName"
+              label="Last name"
+              :value="user.lastName"
+              placeholder="Enter your lastname"
+              :error="errors.lastName"
+            />
+          </div>
+
+          <div class="flex gap-4">
+            <UiInput
+              id="alias"
+              name="alias"
+              label="Alias"
+              :value="user.alias"
+              placeholder="Enter your alias"
+              :error="errors.alias"
+            />
+          </div>
+
+          <div class="flex gap-4">
+            <UiInput
+              id="email"
+              type="email"
+              name="email"
+              label="Email"
+              :value="user.email"
+              placeholder="Enter your email"
+              :error="errors.email"
+              disabled
+            />
+          </div>
+
+          <UiButton type="submit" :loading="usersStore.loading"
+            >Save changes</UiButton
+          >
+        </Form>
         <!-- <form class="flex flex-col max-w-xl gap-4 mt-6">
           <div class="flex gap-4">
             <div class="w-full">
@@ -192,3 +248,33 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import { Form } from 'vee-validate';
+import * as Yup from 'yup';
+import UiButton from '@/components/ui/UiButton.vue';
+import UiInput from '@/components/ui/UiInput.vue';
+import UiMessage from '@/components/ui/UiMessage.vue';
+import { useUsersStore } from '@/stores';
+import { storeToRefs } from 'pinia';
+
+const schema = Yup.object().shape({
+  alias: Yup.string()
+    .required('Alias is required')
+    .min(4, 'Alias must be at least 4 characters'),
+  firstName: Yup.string()
+    .required('firstName is required')
+    .min(4, 'firstName must be at least 4 characters'),
+  lastName: Yup.string()
+    .required('lastName is required')
+    .min(4, 'lastName must be at least 4 characters'),
+});
+
+const usersStore = useUsersStore();
+const { user } = storeToRefs(usersStore);
+
+async function onSubmit(values) {
+  const profile = { ...user.value, ...values };
+  await usersStore.patch(profile);
+}
+</script>
