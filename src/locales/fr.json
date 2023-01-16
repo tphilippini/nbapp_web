@@ -1,0 +1,37 @@
+{
+  "generic": {
+    "appname": "Toma",
+    "welcome": "Bienvenue sur @:generic.appname"
+  },
+  "auth": {
+    "signin": "Connexion à @:generic.appname",
+    "baseline": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Id atque accusantium commodi minima.",
+    "cta": {
+      "signin": "Connexion",
+      "signup": "S'inscrire",
+      "forgotPassword": "Mot de passe oublié ?",
+      "noAccountLink": "Vous n'avez pas de compte ? {link}",
+      "alreadyAnAccountLink": "Vous avez déjà un compte ? {link}",
+      "termsBySignIn": "En vous connectant, vous acceptez nos {terms} et notre {privacy}.",
+      "termsBySignUp": "En vous inscrivant, vous acceptez nos {terms} et notre {privacy}."
+    }
+  },
+  "terms": {
+    "conditions": "Conditions Générales",
+    "privacy": "Politique de confidentialité"
+  },
+  "form": {
+    "alias": {
+      "label": "Alias",
+      "placeholder": "Saisissez votre alias"
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "Saisissez votre email"
+    },
+    "password": {
+      "label": "Mot de passe",
+      "placeholder": "Saisissez votre mot de passe"
+    }
+  }
+}

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-end gap-3">
+  <div class="flex items-end justify-between gap-3">
     <div class="text-2xl font-medium">
       <div
         class="px-2 py-1 text-sm font-medium rounded-lg bg-emerald-50 text-emerald-600"
@@ -7,14 +7,25 @@
         Open Beta 🏀
       </div>
     </div>
+    <UiLangSelect />
   </div>
+
   <div class="flex flex-col w-full gap-2 mt-4">
-    <h1 class="text-2xl font-medium">Welcome to Toma</h1>
+    <h1 class="text-2xl font-medium">{{ $t('generic.welcome') }}</h1>
     <p class="text-gray-500">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Id atque
-      accusantium commodi minima.
+      {{ $t('auth.baseline') }}
     </p>
-    <div class="flex flex-col gap-4 mt-4">
+
+    <!-- <div class="relative mt-4">
+      <div class="absolute inset-0 flex items-center" aria-hidden="true">
+        <div class="w-full border-t border-gray-300"></div>
+      </div>
+      <div class="relative flex justify-center text-sm">
+        <span class="px-2 text-gray-500 bg-white">or</span>
+      </div>
+    </div> -->
+
+    <div class="flex flex-col gap-4 mt-2">
       <UiMessage />
 
       <Form
@@ -26,8 +37,8 @@
         <UiInput
           id="alias"
           name="alias"
-          label="Alias"
-          placeholder="Enter your alias"
+          :label="$t('form.alias.label').toString()"
+          :placeholder="$t('form.alias.placeholder').toString()"
           :error="errors.alias"
         />
 
@@ -35,8 +46,8 @@
           id="email"
           type="email"
           name="email"
-          label="Email"
-          placeholder="Enter your email"
+          :label="$t('form.email.label').toString()"
+          :placeholder="$t('form.email.placeholder').toString()"
           :error="errors.email"
         />
 
@@ -44,12 +55,14 @@
           id="password"
           type="password"
           name="password"
-          label="Password"
-          placeholder="••••••••••"
+          :label="$t('form.password.label').toString()"
+          :placeholder="$t('form.password.placeholder').toString()"
           :error="errors.password"
         />
 
-        <UiButton type="submit" :loading="userStore.loading">Sign up</UiButton>
+        <UiButton type="submit" :loading="userStore.loading">{{
+          $t('auth.cta.signup')
+        }}</UiButton>
 
         <!-- <button
           type="button"
@@ -149,11 +162,45 @@
           </div>
         </button> -->
 
-        <div class="text-sm text-gray-500">
-          Already have an account?
-          <router-link to="/auth/signin" class="text-primary-600"
-            >Sign in</router-link
+        <i18n-t
+          keypath="auth.cta.alreadyAnAccountLink"
+          tag="div"
+          class="text-sm text-gray-500"
+          for="signup"
+        >
+          <template #link>
+            <router-link to="/auth/signin" class="text-primary-600">
+              {{ $t('auth.cta.signin') }}
+            </router-link>
+          </template>
+        </i18n-t>
+
+        <div class="flex items-center justify-start mt-2">
+          <i18n-t
+            keypath="auth.cta.termsBySignUp"
+            tag="div"
+            class="text-xs text-gray-500"
           >
+            <template #terms>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                class="underline"
+                href="#terms"
+                >{{ $t('terms.conditions') }}</a
+              >
+            </template>
+
+            <template #privacy>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                class="underline"
+                href="#privacy"
+                >{{ $t('terms.privacy') }}</a
+              >
+            </template>
+          </i18n-t>
         </div>
       </Form>
     </div>
@@ -165,17 +212,20 @@ import { Form } from 'vee-validate';
 import UiInput from '@/components/ui/UiInput.vue';
 import UiButton from '@/components/ui/UiButton.vue';
 import UiMessage from '@/components/ui/UiMessage.vue';
+import UiLangSelect from '@/components/ui/UiLangSelect.vue';
 import * as Yup from 'yup';
 import { useUsersStore } from '@/stores';
 
 const schema = Yup.object().shape({
   alias: Yup.string()
     .required('Alias is required')
-    .min(4, 'Alias must be at least 4 characters'),
-  email: Yup.string().email().required('Email is required'),
+    .min(4, 'Alias must be at least 4 characters')
+    .nullable(),
+  email: Yup.string().email().required('Email is required').nullable(),
   password: Yup.string()
     .required('Password is required')
-    .min(6, 'Password must be at least 6 characters'),
+    .min(6, 'Password must be at least 6 characters')
+    .nullable(),
 });
 
 const userStore = useUsersStore();

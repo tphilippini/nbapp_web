@@ -7,6 +7,7 @@
         <router-view />
       </div>
     </div>
+
     <div class="flex-col justify-center hidden bg-cover bg-primary-600 md:flex">
       <div class="relative mx-auto w-80">Image</div>
     </div>

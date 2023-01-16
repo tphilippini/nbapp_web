@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-end gap-3">
+  <div class="flex items-end justify-between gap-3">
     <div class="text-2xl font-medium">
       <div
         class="px-2 py-1 text-sm font-medium rounded-lg bg-emerald-50 text-emerald-600"
@@ -7,12 +7,13 @@
         Open Beta 🏀
       </div>
     </div>
+    <UiLangSelect />
   </div>
+
   <div class="flex flex-col w-full gap-2 mt-4">
-    <h1 class="text-2xl font-medium">Sign in to Toma</h1>
+    <h1 class="text-2xl font-medium">{{ $t('auth.signin') }}</h1>
     <p class="text-gray-500">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Id atque
-      accusantium commodi minima.
+      {{ $t('auth.baseline') }}
     </p>
 
     <div class="flex flex-col gap-4 mt-4">
@@ -28,8 +29,8 @@
           id="email"
           type="email"
           name="email"
-          label="Email"
-          placeholder="Enter your email"
+          :label="$t('form.email.label').toString()"
+          :placeholder="$t('form.email.placeholder').toString()"
           :error="errors.email"
         />
 
@@ -37,12 +38,14 @@
           id="password"
           type="password"
           name="password"
-          label="Password"
-          placeholder="••••••••••"
+          :label="$t('form.password.label').toString()"
+          :placeholder="$t('form.password.placeholder').toString()"
           :error="errors.password"
         />
 
-        <UiButton type="submit" :loading="authStore.loading">Sign in</UiButton>
+        <UiButton type="submit" :loading="authStore.loading">{{
+          $t('auth.cta.signin')
+        }}</UiButton>
 
         <!-- <button
                 type="button"
@@ -147,17 +150,52 @@
               </button> -->
 
         <div class="flex items-center justify-between">
-          <div class="text-sm text-gray-500">
-            Don't have an account?
-            <router-link to="/auth/signup" class="text-primary-600"
-              >Sign up</router-link
-            >
-          </div>
+          <i18n-t
+            keypath="auth.cta.noAccountLink"
+            tag="div"
+            class="text-sm text-gray-500"
+            for="signup"
+          >
+            <template #link>
+              <router-link to="/auth/signup" class="text-primary-600">
+                {{ $t('auth.cta.signup') }}
+              </router-link>
+            </template>
+          </i18n-t>
+
           <div class="text-sm">
-            <router-link to="/auth/forgot" class="text-primary-600"
-              >Forgot password?</router-link
-            >
+            <router-link to="/auth/forgot" class="text-primary-600">{{
+              $t('auth.cta.forgotPassword')
+            }}</router-link>
           </div>
+        </div>
+
+        <div class="flex items-center justify-start mt-2">
+          <i18n-t
+            keypath="auth.cta.termsBySignIn"
+            tag="div"
+            class="text-xs text-gray-500"
+          >
+            <template #terms>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                class="underline"
+                href="#terms"
+                >{{ $t('terms.conditions') }}</a
+              >
+            </template>
+
+            <template #privacy>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                class="underline"
+                href="#privacy"
+                >{{ $t('terms.privacy') }}</a
+              >
+            </template>
+          </i18n-t>
         </div>
       </Form>
     </div>
@@ -169,12 +207,13 @@ import { Form } from 'vee-validate';
 import * as Yup from 'yup';
 import UiButton from '@/components/ui/UiButton.vue';
 import UiInput from '@/components/ui/UiInput.vue';
+import UiLangSelect from '@/components/ui/UiLangSelect.vue';
 import UiMessage from '@/components/ui/UiMessage.vue';
 import { useAuthStore } from '@/stores';
 
 const schema = Yup.object().shape({
-  email: Yup.string().email().required('Email is required'),
-  password: Yup.string().required('Password is required'),
+  email: Yup.string().email().required('Email is required').nullable(),
+  password: Yup.string().required('Password is required').nullable(),
 });
 
 const authStore = useAuthStore();
