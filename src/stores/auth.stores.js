@@ -51,11 +51,13 @@ export const useAuthStore = defineStore(
         router.push('/');
       } catch (error) {
         loading.value = false;
-        if (error.errors) {
+
+        if (error.errors.length) {
           messageStore.error(error.errors[0].message);
         } else {
           messageStore.error('Désolé, une erreur est survenue...');
         }
+
         messageStore.clear();
       }
     };

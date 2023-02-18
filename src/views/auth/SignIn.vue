@@ -152,6 +152,7 @@
         <div class="flex items-center justify-between">
           <i18n-t
             keypath="auth.cta.noAccountLink"
+            scope="global"
             tag="div"
             class="text-sm text-gray-500"
             for="signup"
@@ -173,6 +174,7 @@
         <div class="flex items-center justify-start mt-2">
           <i18n-t
             keypath="auth.cta.termsBySignIn"
+            scope="global"
             tag="div"
             class="text-xs text-gray-500"
           >
