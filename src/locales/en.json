@@ -4,12 +4,17 @@
     "welcome": "Welcome to @:generic.appname"
   },
   "auth": {
+    "reset": "Reset my password",
+    "resetProcess": "Processing the access token verification for resetting the password...",
+    "forgot": "Forgot password",
     "signin": "Sign in to @:generic.appname",
     "baseline": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Id atque accusantium commodi minima.",
+    "invalidToken": "Invalid access token",
     "cta": {
       "signin": "Sign in",
       "signup": "Sign up",
-      "forgotPassword": "Forgot password?",
+      "reset": "@:auth.reset",
+      "forgotPassword": "@:auth.forgot ?",
       "noAccountLink": "Don't have an account? {link}",
       "alreadyAnAccountLink": "Already have an account? {link}",
       "termsBySignIn": "By signing in, you accept our {terms} and our {privacy}.",
@@ -31,7 +36,10 @@
     },
     "password": {
       "label": "Password",
-      "placeholder": "Enter your password"
+      "placeholder": "Enter your @.lower:form.password.label",
+      "new": "New @.lower:form.password.label",
+      "newPlaceholder": "Enter your @.lower:form.password.new",
+      "confirm": "Confirm your @.lower:form.password.new"
     }
   }
 }

@@ -154,7 +154,7 @@
             keypath="auth.cta.noAccountLink"
             scope="global"
             tag="div"
-            class="text-sm text-gray-500"
+            class="flex justify-center text-sm text-gray-500 gap-x-2"
             for="signup"
           >
             <template #link>
@@ -164,7 +164,7 @@
             </template>
           </i18n-t>
 
-          <div class="text-sm">
+          <div class="flex justify-center text-sm">
             <router-link to="/auth/forgot" class="text-primary-600">{{
               $t('auth.cta.forgotPassword')
             }}</router-link>
@@ -182,7 +182,7 @@
               <a
                 target="_blank"
                 rel="noopener noreferrer"
-                class="underline"
+                class="underline align-baseline"
                 href="#terms"
                 >{{ $t('terms.conditions') }}</a
               >
@@ -192,7 +192,7 @@
               <a
                 target="_blank"
                 rel="noopener noreferrer"
-                class="underline"
+                class="underline align-baseline"
                 href="#privacy"
                 >{{ $t('terms.privacy') }}</a
               >

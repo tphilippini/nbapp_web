@@ -166,7 +166,7 @@
           keypath="auth.cta.alreadyAnAccountLink"
           scope="global"
           tag="div"
-          class="text-sm text-gray-500"
+          class="flex justify-start text-sm text-gray-500 gap-x-2"
           for="signup"
         >
           <template #link>
@@ -187,7 +187,7 @@
               <a
                 target="_blank"
                 rel="noopener noreferrer"
-                class="underline"
+                class="underline align-baseline"
                 href="#terms"
                 >{{ $t('terms.conditions') }}</a
               >
@@ -197,7 +197,7 @@
               <a
                 target="_blank"
                 rel="noopener noreferrer"
-                class="underline"
+                class="underline align-baseline"
                 href="#privacy"
                 >{{ $t('terms.privacy') }}</a
               >
