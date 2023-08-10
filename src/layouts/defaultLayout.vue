@@ -264,7 +264,7 @@
                 />
               </div>
               <div class="truncate">
-                <div v-if="user.alias" class="capitalize truncate">
+                <div v-if="user && user.alias" class="capitalize truncate">
                   {{ user.alias }}
                 </div>
               </div>

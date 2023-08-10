@@ -26,7 +26,7 @@
               id="firstName"
               name="firstName"
               label="First name"
-              :value="user.firstName"
+              :value="user?.firstName || ''"
               placeholder="Enter your firstname"
               :error="errors.firstName"
             />
@@ -35,7 +35,7 @@
               id="lastName"
               name="lastName"
               label="Last name"
-              :value="user.lastName"
+              :value="user?.lastName || ''"
               placeholder="Enter your lastname"
               :error="errors.lastName"
             />
@@ -46,7 +46,7 @@
               id="alias"
               name="alias"
               label="Alias"
-              :value="user.alias"
+              :value="user?.alias || ''"
               placeholder="Enter your alias"
               :error="errors.alias"
             />
@@ -58,7 +58,7 @@
               type="email"
               name="email"
               label="Email"
-              :value="user.email"
+              :value="user?.email || ''"
               placeholder="Enter your email"
               :error="errors.email"
               disabled

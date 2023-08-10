@@ -5,7 +5,7 @@ export default {
   path: '/account',
   component: Default,
   children: [
-    { path: '', component: Index, meta: { requiresAuth: true } },
+    { path: '', component: Index },
     // { path: 'confirm', name: 'confirm', component: Confirm, meta: { requiresAuth: true } },
     // {
     //   path: 'profile',

@@ -46,8 +46,8 @@ export const useUsersStore = defineStore(
     };
 
     const getAvatarInitial = () => {
-      let username = user.value.alias;
-      if (user.value.firstName && user.value.lastName) {
+      let username = user.value?.alias || '';
+      if (user.value?.firstName && user.value?.lastName) {
         username = `${user.value.firstName} ${user.value.lastName}`;
       }
 
